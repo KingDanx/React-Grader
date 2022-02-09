@@ -7,30 +7,29 @@ import QuestionMapper from "./components/QuestionMapper";
 import "./styles/CreateTest.css"
 
 const CreateTask = () => {
-  const [inputNumber, setInputNumber] = React.useState("");
-  const [error, setError] = useState(false);
+  const [state, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
+  const [mapArray, setMapArray] = useState([null])
 
   const newTest = () => {};
 
   //an array full of empty values, map that array and put in the fields
   //if press button increase size of array
 
-  let mapArray = [null];
+  
+
+  const addQuestion = () => {
+    mapArray.push(null);
+    forceUpdate();
+  }
 
   //need arrays for each schema type attach for form values
-
-  const { formValue, handleChange, handleSubmit, setFormValue, handleCheck } =
-    useForm(newTest);
-
-  const handleNumberSelect = (event) => {
-    setInputNumber(event.target.value);
-  };
 
   return (
     <div className="create-test-container"> 
       <QuestionMapper mapArray={mapArray} newTest={newTest} />
       <div className="create-test-buttons">
-        <Button variant="outlined">Add Question</Button>
+        <Button variant="outlined" onClick={()=>addQuestion()}>Add Question</Button>
         <Button sx={{ marginLeft: "12px" }} variant="contained">
           Submit
         </Button>
