@@ -40,9 +40,9 @@ const CreateTask = () => {
                 name={`inputNumber${index}`}
                 type="text"
                 onChange={(event) => handleChange(event)}
-                error={isNaN(formValue.inputNumber) ? true : false}
+                error={isNaN(formValue[`inputNumber${index}`]) ? true : false}
                 helperText={
-                  isNaN(formValue.inputNumber) ? "Input a Number" : null
+                  isNaN(formValue[`inputNumber${index}`]) ? "Input a Number" : null
                 }
               />
               <FormControl sx={{ m: 1, minWidth: 120 }}>
