@@ -1,0 +1,10 @@
+.create-test-container {
+    display: -ms-inline-grid;
+    display: inline-grid;
+}
+
+.create-test-buttons {
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: flex-end;
+}
