@@ -25,6 +25,13 @@ const QuestionMapper = ({ mapArray, newTest, validForm, setValidForm }) => {
     <div>
       Create Test
       <div>
+        <TextField
+          id="test-name"
+          label="Test Name"
+          variant="standard"
+          name={"testName"}
+          onChange={(event) => handleChange(event)}
+        />
         {mapArray.map((el, index) => {
           return (
             <div key={index}>
@@ -139,9 +146,12 @@ const QuestionMapper = ({ mapArray, newTest, validForm, setValidForm }) => {
               ? true
               : mapArray.some(
                   (so, i) =>
-                    (formValue[`inputNumber${i}`] === "" ||
-                    !formValue[`inputNumber${i}`]) || isNaN(formValue[`inputNumber${i}`])
+                    formValue[`inputNumber${i}`] === "" ||
+                    !formValue[`inputNumber${i}`] ||
+                    isNaN(formValue[`inputNumber${i}`])
                 ) === true
+              ? true
+              : !formValue.testName
               ? true
               : false
           }
