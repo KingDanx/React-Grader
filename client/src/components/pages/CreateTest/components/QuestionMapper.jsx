@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import useForm from "../../../../useForm";
 import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
@@ -7,16 +8,67 @@ import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import "../styles/QuestionMapper.css";
 
-const QuestionMapper = ({ mapArray, newTest, validForm, setValidForm }) => {
+const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
+  const [inputNumbers, setInputNumbers] = useState([]);
+  const [inputUnit, setInputUnit] = useState([]);
+  const [outputUnit, setOutputUnit] = useState([]);
+  const [correct, setCorrect] = useState([]);
   const [state, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
-  //an array full of empty values, map that array and put in the fields
-  //if press button increase size of array
 
-  //need arrays for each schema type attach for form values
-  const addQuestion = () => {
+  const addQuestion = (inNum, inType, outType) => {
+    inputNumbers.push(inNum);
+    console.log(inputNumbers);
+    inputUnit.push(inType);
+    console.log(inputUnit);
+    outputUnit.push(outType);
+    console.log(outputUnit);
+    correct.push(null);
+    console.log(correct);
+
     mapArray.push(null);
     forceUpdate();
+  };
+
+  const finishForm = (event, inNum, inType, outType) => {
+    inputNumbers.push(inNum);
+    console.log(inputNumbers);
+    inputUnit.push(inType);
+    console.log(inputUnit);
+    outputUnit.push(outType);
+    console.log(outputUnit);
+    correct.push(null);
+    console.log(correct);
+    handleSubmit(event);
+    alert(`${formValue.testName} has been created!`);
+    window.location.reload();
+  };
+
+  const newTest = async () => {
+    await axios
+      .post(`http://localhost:5000/api/tests/createTest`, {
+        testName: formValue.testName,
+        inputNumber: inputNumbers,
+        inputUnit: inputUnit,
+        correct: correct,
+        outputUnit: outputUnit,
+        studentGrade: 0,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
   };
 
   const { formValue, handleChange, handleSubmit } = useForm(newTest);
@@ -31,6 +83,7 @@ const QuestionMapper = ({ mapArray, newTest, validForm, setValidForm }) => {
           variant="standard"
           name={"testName"}
           onChange={(event) => handleChange(event)}
+          sx={{ marginBottom: "18px" }}
         />
         {mapArray.map((el, index) => {
           return (
@@ -126,10 +179,51 @@ const QuestionMapper = ({ mapArray, newTest, validForm, setValidForm }) => {
         })}
       </div>
       <div className="create-test-buttons">
-        <Button variant="outlined" onClick={() => addQuestion()}>
+        <Button
+          disabled={
+            mapArray.some(
+              (so, i) =>
+                formValue[`inputUnit${i}`] === "" || !formValue[`inputUnit${i}`]
+            ) === true
+              ? true
+              : mapArray.some(
+                  (so, i) =>
+                    formValue[`outputUnit${i}`] === "" ||
+                    !formValue[`outputUnit${i}`]
+                ) === true
+              ? true
+              : mapArray.some(
+                  (so, i) =>
+                    formValue[`inputNumber${i}`] === "" ||
+                    !formValue[`inputNumber${i}`] ||
+                    isNaN(formValue[`inputNumber${i}`])
+                ) === true
+              ? true
+              : !formValue.testName
+              ? true
+              : false
+          }
+          variant="outlined"
+          onClick={() =>
+            addQuestion(
+              formValue[`inputNumber${mapArray.length - 1}`],
+              formValue[`inputUnit${mapArray.length - 1}`],
+              formValue[`inputUnit${mapArray.length - 1}`],
+              formValue[`outputUnit${mapArray.length - 1}`]
+            )
+          }
+        >
           Add Question
         </Button>
         <Button
+          onClick={(event) =>
+            finishForm(event,
+              formValue[`inputNumber${mapArray.length - 1}`],
+              formValue[`inputUnit${mapArray.length - 1}`],
+              formValue[`inputUnit${mapArray.length - 1}`],
+              formValue[`outputUnit${mapArray.length - 1}`]
+             )
+          }
           sx={{ marginLeft: "12px" }}
           variant="contained"
           disabled={

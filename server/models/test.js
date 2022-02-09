@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const testSchema = new mongoose.Schema({
+    testName: { type: String, required: true },
     inputNumber: [{ type: Number, minlength: 1 }],
-    inputType: [{ type: String }],
-    inputCorrect: [{ type: Boolean }],
+    inputUnit: [{ type: String }],
+    correct: [{ type: Boolean }],
+    outputUnit: [{ type: String }],
     studentGrade: { type: Number },
   });
   
@@ -12,9 +14,11 @@ const testSchema = new mongoose.Schema({
   
   const validateTest = (test) => {
     const schema = Joi.object({
+        testName: Joi.string().required(),
         inputNumber: Joi.array(),
-        inputType: Joi.array(),
-        inputCorrect: Joi.array(),
+        inputUnit: Joi.array(),
+        correct: Joi.array(),
+        outputUnit: Joi.array(),
         studentGrade: Joi.number(),
     })
     return schema.validate(test)

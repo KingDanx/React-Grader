@@ -9,9 +9,11 @@ router.post("/createTest", async (req, res) => {
     const { error } = validateTest(req.body);
     if (error) return res.status(400).send(error.details[0].message);
       const test = new Test({
+      testName: req.body.testName,
       inputNumber: req.body.inputNumber,
-      inputType: req.body.inputType,
-      inputCorrect: req.body.inputCorrect,
+      inputUnit: req.body.inputUnit,
+      outputUnit: req.body.outputUnit,
+      correct: req.body.correct,
       studentGrade: req.body.studentGrade,
     });
 
