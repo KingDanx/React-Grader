@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import useForm from "../../../../useForm";
 import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import '../styles/QuestionMapper.css'
+import Button from "@mui/material/Button";
+import "../styles/QuestionMapper.css";
 
-const QuestionMapper = ({mapArray, newTest}) => {
+const QuestionMapper = ({ mapArray, newTest, validForm, setValidForm }) => {
+  const [state, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
   //an array full of empty values, map that array and put in the fields
   //if press button increase size of array
 
   //need arrays for each schema type attach for form values
+  const addQuestion = () => {
+    mapArray.push(null);
+    forceUpdate();
+  };
 
-  const { formValue, handleChange, handleSubmit, setFormValue, handleCheck } =
-    useForm(newTest);
+  const { formValue, handleChange, handleSubmit } = useForm(newTest);
 
   return (
     <div>
@@ -44,7 +50,7 @@ const QuestionMapper = ({mapArray, newTest}) => {
                   <Select
                     native
                     defaultValue=""
-                    id="unit-select"
+                    id={`unit-select${index}`}
                     label="Units"
                     name={`inputUnit${index}`}
                     onChange={(event) => handleChange(event)}
@@ -112,8 +118,39 @@ const QuestionMapper = ({mapArray, newTest}) => {
           );
         })}
       </div>
+      <div className="create-test-buttons">
+        <Button variant="outlined" onClick={() => addQuestion()}>
+          Add Question
+        </Button>
+        <Button
+          sx={{ marginLeft: "12px" }}
+          variant="contained"
+          disabled={
+            mapArray.some(
+              (so, i) =>
+                formValue[`inputUnit${i}`] === "" || !formValue[`inputUnit${i}`]
+            ) === true
+              ? true
+              : mapArray.some(
+                  (so, i) =>
+                    formValue[`outputUnit${i}`] === "" ||
+                    !formValue[`outputUnit${i}`]
+                ) === true
+              ? true
+              : mapArray.some(
+                  (so, i) =>
+                    (formValue[`inputNumber${i}`] === "" ||
+                    !formValue[`inputNumber${i}`]) || isNaN(formValue[`inputNumber${i}`])
+                ) === true
+              ? true
+              : false
+          }
+        >
+          Submit
+        </Button>
+      </div>
     </div>
   );
 };
- 
+
 export default QuestionMapper;
