@@ -24,4 +24,13 @@ router.post("/createTest", async (req, res) => {
   }
 });
 
+router.get('/all', async (req, res) => {
+  try {
+    const task = await Test.find();
+    return res.send(task);
+  } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
 module.exports = router;
