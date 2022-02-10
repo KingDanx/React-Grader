@@ -125,8 +125,8 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                     <optgroup label="Volume">
                       <option value={"liters"}>Liters</option>
                       <option value={"tablespoons"}>Tablespoons</option>
-                      <option value={"cubicInches"}>Cubic-Inches</option>
-                      <option value={"cubicFeet"}>Cubic-Feet</option>
+                      <option value={"cubic inches"}>Cubic Inches</option>
+                      <option value={"cubic feet"}>Cubic Feet</option>
                       <option value={"cups"}>Cups</option>
                       <option value={"gallons"}>Gallons</option>
                     </optgroup>
@@ -153,20 +153,20 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                         <option value={"kelvin"}>Kelvin</option>
                         <option value={"celsius"}>Celsius</option>
                         <option value={"fahrenheit"}>Fahrenheit</option>
-                        <option value={""}>Rankine</option>
+                        <option value={"rankine"}>Rankine</option>
                       </optgroup>
                     ) : null}
                     {formValue[`inputUnit${index}`] === `liters` ||
                     formValue[`inputUnit${index}`] === `tablespoons` ||
-                    formValue[`inputUnit${index}`] === `cubicInches` ||
-                    formValue[`inputUnit${index}`] === `cubicFeet` ||
+                    formValue[`inputUnit${index}`] === `cubic inches` ||
+                    formValue[`inputUnit${index}`] === `cubic feet` ||
                     formValue[`inputUnit${index}`] === `cups` ||
                     formValue[`inputUnit${index}`] === `gallons` ? (
                       <optgroup label="Volume">
                         <option value={"liters"}>Liters</option>
                         <option value={"tablespoons"}>Tablespoons</option>
-                        <option value={"cubicInches"}>Cubic-Inches</option>
-                        <option value={"cubicFeet"}>Cubic-Feet</option>
+                        <option value={"cubic inches"}>Cubic Inches</option>
+                        <option value={"cubic feet"}>Cubic Feet</option>
                         <option value={"cups"}>Cups</option>
                         <option value={"gallons"}>Gallons</option>
                       </optgroup>
@@ -208,7 +208,6 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
             addQuestion(
               formValue[`inputNumber${mapArray.length - 1}`],
               formValue[`inputUnit${mapArray.length - 1}`],
-              formValue[`inputUnit${mapArray.length - 1}`],
               formValue[`outputUnit${mapArray.length - 1}`]
             )
           }
@@ -219,7 +218,6 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
           onClick={(event) =>
             finishForm(event,
               formValue[`inputNumber${mapArray.length - 1}`],
-              formValue[`inputUnit${mapArray.length - 1}`],
               formValue[`inputUnit${mapArray.length - 1}`],
               formValue[`outputUnit${mapArray.length - 1}`]
              )

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
 import axios from "axios";
-import useForm from "../../../useForm";
 import TestPicker from "./components/TestPicker";
+import TestGrader from "./components/TestGrader";
 
 const GradeTest = () => {
   const [test, setTest] = useState({});
@@ -52,13 +51,13 @@ const GradeTest = () => {
     getAllTest();
   }, []);
 
-  const { formValue, handleChange, handleSubmit } = useForm();
-
   return (
     <div>
       Grade Test
       <div>
         <TestPicker allTests={allTests} getATest={getATest}/>
+        <TestGrader test={test}/>
+
         
               {/* {el.inputNumber.map((li, i) => (
                 <div key={i}>

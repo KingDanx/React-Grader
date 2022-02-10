@@ -7,17 +7,6 @@ const TestPicker = ({ allTests, getATest }) => {
       {allTests.map((el, index) => (
         <div key={index} onClick={() => getATest(el._id)}>
           <b>{el.testName} </b>
-          <div>
-            {/* {el.inputNumber.map((li, i) => (
-                <div key={i}>
-                  Convert {li} {el.inputUnit[i]} to {el.outputUnit[i]}{" "}
-                  <TextField
-                    name={`studentInput${index}${i}`}
-                    onChange={(event) => handleChange(event)}
-                  />
-                </div>
-              ))} */}
-          </div>
         </div>
       ))}
     </div>
