@@ -57,17 +57,6 @@ const GradeTest = () => {
       <div>
         <TestPicker allTests={allTests} getATest={getATest}/>
         <TestGrader test={test}/>
-
-        
-              {/* {el.inputNumber.map((li, i) => (
-                <div key={i}>
-                  Convert {li} {el.inputUnit[i]} to {el.outputUnit[i]}{" "}
-                  <TextField
-                    name={`studentInput${index}${i}`}
-                    onChange={(event) => handleChange(event)}
-                  />
-                </div>
-              ))} */}
       </div>
     </div>
   );

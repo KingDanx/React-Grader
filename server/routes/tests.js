@@ -11,6 +11,7 @@ router.post("/createTest", async (req, res) => {
       const test = new Test({
       testName: req.body.testName,
       inputNumber: req.body.inputNumber,
+      outputNumber: req.body.outputNumber,
       inputUnit: req.body.inputUnit,
       outputUnit: req.body.outputUnit,
       correct: req.body.correct,
@@ -38,6 +39,20 @@ router.get('/:testId', async (req, res) => {
     const test = await Test.findById(req.params.testId);
     return res.send(test);
   } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
+router.put('/gradeTest/:testId', async (req, res) => {
+  try {
+    const test = await Test.findById(req.params.testId);
+    
+    test.outputNumber = req.body.outputNumber;
+
+    await test.save();
+    return res.send(test);
+  }
+  catch (ex) {
     return res.status(500).send(`Internal Server Error: ${ex}`);
   }
 });

@@ -10,6 +10,7 @@ import "../styles/QuestionMapper.css";
 
 const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
   const [inputNumbers, setInputNumbers] = useState([]);
+  const [outputNumbers, setOutputNumbers] = useState([]);
   const [inputUnit, setInputUnit] = useState([]);
   const [outputUnit, setOutputUnit] = useState([]);
   const [correct, setCorrect] = useState([]);
@@ -18,27 +19,21 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
 
   const addQuestion = (inNum, inType, outType) => {
     inputNumbers.push(inNum);
-    console.log(inputNumbers);
     inputUnit.push(inType);
-    console.log(inputUnit);
     outputUnit.push(outType);
-    console.log(outputUnit);
     correct.push(null);
-    console.log(correct);
-
+    outputNumbers.push(null);
     mapArray.push(null);
     forceUpdate();
   };
 
   const finishForm = (event, inNum, inType, outType) => {
     inputNumbers.push(inNum);
-    console.log(inputNumbers);
     inputUnit.push(inType);
-    console.log(inputUnit);
     outputUnit.push(outType);
-    console.log(outputUnit);
     correct.push(null);
-    console.log(correct);
+    outputNumbers.push(null);
+    
     handleSubmit(event);
     alert(`${formValue.testName} has been created!`);
     window.location.reload();
@@ -49,6 +44,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
       .post(`http://localhost:5000/api/tests/createTest`, {
         testName: formValue.testName,
         inputNumber: inputNumbers,
+        outputNumber: outputNumbers,
         inputUnit: inputUnit,
         correct: correct,
         outputUnit: outputUnit,

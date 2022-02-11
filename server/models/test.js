@@ -4,6 +4,7 @@ const Joi = require('joi');
 const testSchema = new mongoose.Schema({
     testName: { type: String, required: true },
     inputNumber: [{ type: Number, minlength: 1 }],
+    outputNumber: [{ type: Number, minlength: 1 }],
     inputUnit: [{ type: String }],
     correct: [{ type: Boolean }],
     outputUnit: [{ type: String }],
@@ -16,6 +17,7 @@ const testSchema = new mongoose.Schema({
     const schema = Joi.object({
         testName: Joi.string().required(),
         inputNumber: Joi.array(),
+        outputNumber: Joi.array(),
         inputUnit: Joi.array(),
         correct: Joi.array(),
         outputUnit: Joi.array(),
