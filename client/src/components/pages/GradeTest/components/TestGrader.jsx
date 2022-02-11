@@ -27,6 +27,7 @@ const TestGrader = ({ test }) => {
                   size="small"
                   name={`question${i}`}
                   value={!formValue[`question${i}`] ? "" : formValue[`question${i}`]}/>
+                {test.correct[i] === null ? "invalid" : null}
               </div>
             ))}
       </div>
