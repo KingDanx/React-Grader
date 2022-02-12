@@ -28,6 +28,18 @@ const TestGrader = ({ test, setTest }) => {
     p: 4,
   };
 
+  const inputStyle = {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "#30a0ff",
+      },
+      backgroundColor: '#ffffffb8',
+    },
+  };
+
   const countOccurrences = (arr, val) =>
     arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
@@ -77,11 +89,12 @@ const TestGrader = ({ test, setTest }) => {
           : test.inputNumber.map((el, i) => (
               <div key={i} className="question-columns">
                 <div>
-                  Convert {el} <b>{test.inputUnit[i]}</b> to{" "}
+                  {i + 1}. Convert {el} <b>{test.inputUnit[i]}</b> to{" "}
                   <b>{test.outputUnit[i]}</b>
                 </div>
                 <div>
                   <TextField
+                    sx={inputStyle}
                     onChange={(event) => handleChange(event)}
                     size="small"
                     name={`question${i}`}

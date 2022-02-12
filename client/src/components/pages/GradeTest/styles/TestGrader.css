@@ -15,8 +15,10 @@
     margin-bottom: 22px;
 }
 
-.test-grader-error-text{
-  
+.css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+    color: rgb(61 42 42 / 52%)!important;
+    box-shadow: none;
+    background-color: rgb(255 255 255 / 50%)!important;
 }
 
 .css-k4qjio-MuiFormHelperText-root {
