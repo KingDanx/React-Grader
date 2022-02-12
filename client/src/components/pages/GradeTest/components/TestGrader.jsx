@@ -4,11 +4,11 @@ import useForm from "../../../../useForm";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Typography from '@mui/material/Typography';
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import Typography from "@mui/material/Typography";
 import "../styles/TestGrader.css";
 
 const TestGrader = ({ test, setTest }) => {
@@ -16,16 +16,19 @@ const TestGrader = ({ test, setTest }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "80%",
+    bgcolor: "background.paper",
+    border: "2px solid #fff",
+    borderRadius: "20px",
     boxShadow: 24,
     p: 4,
   };
+
+  const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
   const gradeTest = async () => {
     await axios
@@ -35,9 +38,9 @@ const TestGrader = ({ test, setTest }) => {
         ),
       })
       .then((res) => {
+        console.log(res.data)
         setTest(res.data);
         setOpen(true);
-        console.log(res);
       })
       .catch(function (error) {
         if (error.response) {
@@ -56,7 +59,7 @@ const TestGrader = ({ test, setTest }) => {
   const { formValue, handleChange, handleSubmit, setFormValue } =
     useForm(gradeTest);
 
-  useEffect(() => {
+  useEffect(() => { 
     setFormValue("");
   }, [test]);
 
@@ -104,59 +107,73 @@ const TestGrader = ({ test, setTest }) => {
             ))}
       </div>
       {!test.inputNumber ? null : (
-        <Tooltip title={
-          test.inputNumber.some(
-            (so, i) =>
-              formValue[`question${i}`] === "" ||
-              !formValue[`question${i}`] ||
-              isNaN(formValue[`question${i}`])
-          ) === true
-            ? "Please answer all questions."
-            : "" }>
+        <Tooltip
+          title={
+            test.inputNumber.some(
+              (so, i) =>
+                formValue[`question${i}`] === "" ||
+                !formValue[`question${i}`] ||
+                isNaN(formValue[`question${i}`])
+            ) === true
+              ? "Please answer all questions."
+              : ""
+          }
+        >
           <span>
-          <Button
-            disabled={
-              test.inputNumber.some(
-                (so, i) =>
-                  formValue[`question${i}`] === "" ||
-                  !formValue[`question${i}`] ||
-                  isNaN(formValue[`question${i}`])
-              ) === true
-                ? true
-                : false
-            }
-            variant="contained"
-            onClick={(event) => handleSubmit(event)}
-          >
-            Grade Test
-          </Button>
+            <Button
+              disabled={
+                test.inputNumber.some(
+                  (so, i) =>
+                    formValue[`question${i}`] === "" ||
+                    !formValue[`question${i}`] ||
+                    isNaN(formValue[`question${i}`])
+                ) === true
+                  ? true
+                  : false
+              }
+              variant="contained"
+              onClick={(event) => handleSubmit(event)}
+            >
+              Grade Test
+            </Button>
           </span>
         </Tooltip>
       )}
-       <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Test Results for {test.testName}:
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
-    </div>
+      <div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={style}>
+              <Typography
+                id="transition-modal-title"
+                variant="h6"
+                component="h2"
+              >
+                Test Results for {test.testName}:
+              </Typography>
+              <Typography component="div" id="transition-modal-description" sx={{ mt: 2 }}>
+                <ol>
+                  {!test.correct ? null : test.correct.map((el, i) => (
+                    <li key={i}>{el === true ? "Correct" : "Incorrect"}</li>
+                  ))}
+                </ol>
+                <p>
+                  Test Score: {(countOccurrences(test.correct, true) / test.correct.length) * 100}%
+                </p>
+              </Typography>
+            </Box>
+          </Fade>
+        </Modal>
+      </div>
     </div>
   );
 };

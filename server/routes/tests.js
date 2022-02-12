@@ -89,10 +89,6 @@ router.put('/gradeTest/:testId', async (req, res) => {
   try {
     const test = await Test.findById(req.params.testId);
     test.outputNumber = req.body.outputNumber;
-    //set correct equal to an empty array
-    //iterate over number of test questions
-    //compare outputNumber to tempConversion(outputNumber)
-    //if equal to eachother push true, else push false
     let temps = ['kelvin', 'fahrenheit', 'celsius', 'rankine'];
     let volumes = ['liters', 'cubic inches', 'cups', 'tablespoons', 'cubic feet', 'gallons'];
     test.correct = [];
