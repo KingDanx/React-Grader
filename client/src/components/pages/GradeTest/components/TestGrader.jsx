@@ -21,8 +21,8 @@ const TestGrader = ({ test, setTest }) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "80%",
-    bgcolor: "background.paper",
-    border: "2px solid #fff",
+    bgcolor: "#686868",
+    border: "none",
     borderRadius: "20px",
     boxShadow: 24,
     p: 4,
@@ -78,11 +78,6 @@ const TestGrader = ({ test, setTest }) => {
 
   return (
     <div className="test-grader-component">
-      {!test.inputNumber ? (
-        <h2>{"Select a test to grade."}</h2>
-      ) : (
-        <h2>{`Grading ${test.testName}`}</h2>
-      )}
       <div>
         {!test.inputNumber
           ? null

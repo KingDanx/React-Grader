@@ -17,7 +17,12 @@ const TestPicker = ({ test, setTest, allTests, getATest }) => {
   };
 
   return (
-    <div>
+    <div className="test-picker-center">
+      {!test.inputNumber ? (
+        <h2>{"Select a test to grade."}</h2>
+      ) : (
+        <h2>{`Grading ${test.testName}`}</h2>
+      )}
       <div className="test-picker-center">
       <Autocomplete
       disablePortal
