@@ -6,7 +6,8 @@
     "joi": "^17.6.0",
     "mongoose": "^6.2.1",
     "nodemon": "^2.0.15",
-    "temperature-js": "^0.1.0"
+    "temperature-js": "^0.1.0",
+    "unitz": "^0.6.0"
   },
   "scripts": {
     "start": "nodemon index.js",

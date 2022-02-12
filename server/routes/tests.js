@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const Temperature = require("temperature-js");
+const Unitz = require("unitz");
 
 //Create a new Test
 router.post("/createTest", async (req, res) => {
@@ -51,12 +52,36 @@ const tempConverstion = (inputUnit, outputUnit, inputNumber) => {
   return answer.toString();
 }
 
-console.log(tempConverstion(`celcius`, `kelvin`, 9.26));
+console.log(tempConverstion(`kelvin`, `celcius`, 9.26));
+
+const volumeConversion = (inputNumber, inputUnit, outputUnit) => {
+  let answer = Math.round(Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`${outputUnit}`) * 10) / 10;
+  return answer.toString();
+}
+
+console.log(volumeConversion(`2`, `litres`, `cup`));
 
 router.put('/gradeTest/:testId', async (req, res) => {
   try {
     const test = await Test.findById(req.params.testId);
-    
+    //set correct equal to an empty array
+    //iterate over number of test questions
+    //compare outputNumber to tempConversion(outputNumber)
+    //if equal to eachother push true, else push false
+    let temps = ['kelvin', 'fahrenheit', 'celsius', 'rankine'];
+    let volumes = ['liters', 'cubic inches', 'cups', 'tablespoons', 'cubic feet', 'gallons'];
+    test.correct = [];
+    test.outputNumber.map((el, i) => {
+      if(temps.some((so)=> so === el) === true){
+        el === tempConverstion(test.inputUnit[i], el, test.outputNumber[i]) ? test.correct.push(true) : test.correct.push(false);
+      }
+      else {
+
+      }
+        
+    })
+
+
     test.outputNumber = req.body.outputNumber;
 
     await test.save();
