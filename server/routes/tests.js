@@ -47,7 +47,8 @@ router.get('/:testId', async (req, res) => {
 
 const tempConverstion = (inputUnit, outputUnit, inputNumber) => {
   let firstLetterUppercase = outputUnit.charAt(0).toUpperCase() + outputUnit.slice(1);
-    return Math.round(Temperature[`${inputUnit}To${firstLetterUppercase}`](inputNumber) * 10) / 10;
+  let answer =  Math.round(Temperature[`${inputUnit}To${firstLetterUppercase}`](inputNumber) * 10) / 10;
+  return answer.toString();
 }
 
 console.log(tempConverstion(`celcius`, `kelvin`, 9.26));
