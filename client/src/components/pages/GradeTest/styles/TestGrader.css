@@ -1,0 +1,35 @@
+.test-grader-component {
+    display: -ms-grid;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.question-columns {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1.5fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: center;
+    margin-top: 22px;
+}
+
+.test-grader-error-text{
+  
+}
+
+.css-k4qjio-MuiFormHelperText-root {
+    position: absolute!important;
+    margin-top: 40px!important;
+    color: rgba(0, 0, 0, 0.6);
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+    text-align: left;
+    margin-right: 4px;
+    margin-bottom: 0;
+    margin-left: 6px!important;
+}

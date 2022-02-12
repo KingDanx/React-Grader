@@ -28,7 +28,8 @@ const TestGrader = ({ test, setTest }) => {
     p: 4,
   };
 
-  const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+  const countOccurrences = (arr, val) =>
+    arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
   const gradeTest = async () => {
     await axios
@@ -38,7 +39,7 @@ const TestGrader = ({ test, setTest }) => {
         ),
       })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setTest(res.data);
         setOpen(true);
       })
@@ -59,12 +60,12 @@ const TestGrader = ({ test, setTest }) => {
   const { formValue, handleChange, handleSubmit, setFormValue } =
     useForm(gradeTest);
 
-  useEffect(() => { 
+  useEffect(() => {
     setFormValue("");
   }, [test]);
 
   return (
-    <div>
+    <div className="test-grader-component">
       {!test.inputNumber ? (
         <h2>{"Select a test to grade."}</h2>
       ) : (
@@ -74,34 +75,40 @@ const TestGrader = ({ test, setTest }) => {
         {!test.inputNumber
           ? null
           : test.inputNumber.map((el, i) => (
-              <div key={i}>
-                Convert {el} <b>{test.inputUnit[i]}</b> to{" "}
-                <b>{test.outputUnit[i]}</b>
-                <TextField
-                  onChange={(event) => handleChange(event)}
-                  size="small"
-                  name={`question${i}`}
-                  value={
-                    !formValue[`question${i}`] ? "" : formValue[`question${i}`]
-                  }
-                  error={
-                    (formValue[`question${i + 1}`] &&
-                      !formValue[`question${i}`]) ||
-                    (isNaN(formValue[`question${i}`]) &&
-                      formValue[`question${i}`])
-                      ? true
-                      : false
-                  }
-                  helperText={
-                    isNaN(formValue[`question${i}`]) &&
-                    formValue[`question${i}`]
-                      ? `Input a Number`
-                      : formValue[`question${i + 1}`]  &&
-                        !formValue[`question${i}`]
-                      ? "Input a Number"
-                      : null
-                  }
-                />
+              <div key={i} className="question-columns">
+                <div>
+                  Convert {el} <b>{test.inputUnit[i]}</b> to{" "}
+                  <b>{test.outputUnit[i]}</b>
+                </div>
+                <div>
+                  <TextField
+                    onChange={(event) => handleChange(event)}
+                    size="small"
+                    name={`question${i}`}
+                    value={
+                      !formValue[`question${i}`]
+                        ? ""
+                        : formValue[`question${i}`]
+                    }
+                    error={
+                      (formValue[`question${i + 1}`] &&
+                        !formValue[`question${i}`]) ||
+                      (isNaN(formValue[`question${i}`]) &&
+                        formValue[`question${i}`])
+                        ? true
+                        : false
+                    }
+                    helperText={
+                      isNaN(formValue[`question${i}`]) &&
+                      formValue[`question${i}`]
+                        ? `Input a Number`
+                        : formValue[`question${i + 1}`] &&
+                          !formValue[`question${i}`]
+                        ? "Input a Number"
+                        : null
+                    }
+                  />
+                </div>
               </div>
             ))}
       </div>
@@ -159,14 +166,25 @@ const TestGrader = ({ test, setTest }) => {
               >
                 Test Results for {test.testName}:
               </Typography>
-              <Typography component="div" id="transition-modal-description" sx={{ mt: 2 }}>
+              <Typography
+                component="div"
+                id="transition-modal-description"
+                sx={{ mt: 2 }}
+              >
                 <ol>
-                  {!test.correct ? null : test.correct.map((el, i) => (
-                    <li key={i}>{el === true ? "Correct" : "Incorrect"}</li>
-                  ))}
+                  {!test.correct
+                    ? null
+                    : test.correct.map((el, i) => (
+                        <li key={i}>{el === true ? "Correct" : "Incorrect"}</li>
+                      ))}
                 </ol>
                 <p>
-                  Test Score: {(!test.correct ? null : countOccurrences(test.correct, true) / test.correct.length) * 100}%
+                  Test Score:{" "}
+                  {(!test.correct
+                    ? null
+                    : countOccurrences(test.correct, true) /
+                      test.correct.length) * 100}
+                  %
                 </p>
               </Typography>
             </Box>
