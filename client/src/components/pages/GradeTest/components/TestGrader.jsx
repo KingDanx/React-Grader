@@ -4,7 +4,7 @@ import useForm from "../../../../useForm";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
-const TestGrader = ({ test }) => {
+const TestGrader = ({ test, setTest }) => {
   
     const userOutput = [];
 
@@ -14,6 +14,7 @@ const TestGrader = ({ test }) => {
         outputNumber: test.outputNumber.map((el, i) => formValue[`question${i}`])
     })
     .then((res) => {
+      setTest(res.data);
       console.log(res);
     })
     .catch(function (error) {
@@ -31,6 +32,7 @@ const TestGrader = ({ test }) => {
 };
 
   const { formValue, handleChange, handleSubmit, setFormValue } = useForm(gradeTest);
+  
   useEffect(() => {
     setFormValue('');
   }, [test]);
