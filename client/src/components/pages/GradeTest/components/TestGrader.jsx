@@ -51,7 +51,7 @@ const TestGrader = ({ test }) => {
                   size="small"
                   name={`question${i}`}
                   value={!formValue[`question${i}`] ? "" : formValue[`question${i}`]}/>
-                {test.correct[i] === null ? "invalid" : null}  check true/false - backend route
+                {test.correct[i] === true ? "Correct" : "Incorrect"}  
               </div>
             ))}
       </div>

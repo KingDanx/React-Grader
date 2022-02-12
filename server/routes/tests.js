@@ -57,11 +57,33 @@ const tempConverstion = (inputUnit, outputUnit, inputNumber) => {
 // console.log(tempConverstion(`kelvin`, `celsius`, 9.26));
 
 const volumeConversion = (inputNumber, inputUnit, outputUnit) => {
-  let answer = Math.round(Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`${outputUnit}`) * 10) / 10;
-  return answer.toString();
+  let answer;
+  if( inputUnit == `cubic inches`){
+    let gallons = Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`gallons`)
+    answer = Math.round(Unitz.parse(`${gallons} gallons`).convert(`${outputUnit}`) * 10) / 10;
+    return answer.toString();
+  }
+  else if( inputUnit == `cubic feet`){
+    let gallons = Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`gallons`)
+    answer = Math.round(Unitz.parse(`${gallons} gallons`).convert(`${outputUnit}`) * 10) / 10;
+    return answer.toString();
+  }
+  else if(outputUnit == `cubic inches`){
+    let gallons = Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`gallons`)
+    answer = Math.round(Unitz.parse(`${gallons} gallons`).convert(`${outputUnit}`) * 10) / 10;
+    return answer.toString();
+  }
+  else if(outputUnit == `cubic feet`){
+    let gallons = Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`gallons`)
+    answer = Math.round(Unitz.parse(`${gallons} gallons`).convert(`${outputUnit}`) * 10) / 10;
+    return answer.toString();
+  }
+  else{
+    answer = Math.round(Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`${outputUnit}`) * 10) / 10;
+    return answer.toString();
+  }
+  //Conditionals are nessissary because library does not account for cubic feet to liters. Therefore all cubic feet/inches must be first converted to gallons
 }
-
-console.log(volumeConversion(`23`, `tablespoons`, `liters`));
 
 router.put('/gradeTest/:testId', async (req, res) => {
   try {
@@ -83,9 +105,6 @@ router.put('/gradeTest/:testId', async (req, res) => {
         el.toString() === volumeConversion(test.inputNumber[i], test.inputUnit[i], test.outputUnit[i]) ? test.correct.push(true) : test.correct.push(false);
       }
     })
-
-
-    
 
     await test.save();
     return res.send(test);
