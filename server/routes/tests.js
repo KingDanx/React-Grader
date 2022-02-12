@@ -47,10 +47,10 @@ router.get('/:testId', async (req, res) => {
 
 const tempConverstion = (inputUnit, outputUnit, inputNumber) => {
   let firstLetterUppercase = outputUnit.charAt(0).toUpperCase() + outputUnit.slice(1);
-    return Temperature[`${inputUnit}To${firstLetterUppercase}`](inputNumber);
+    return Math.round(Temperature[`${inputUnit}To${firstLetterUppercase}`](inputNumber) * 10) / 10;
 }
 
-console.log(tempConverstion(`celcius`, `kelvin`, 10));
+console.log(tempConverstion(`celcius`, `kelvin`, 9.26));
 
 router.put('/gradeTest/:testId', async (req, res) => {
   try {
