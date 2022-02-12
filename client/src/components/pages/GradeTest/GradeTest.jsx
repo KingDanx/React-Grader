@@ -53,7 +53,6 @@ const GradeTest = () => {
 
   return (
     <div>
-      Grade Test
       <div>
         <TestPicker test={test} setTest={setTest} allTests={allTests} getATest={getATest}/>
         <TestGrader test={test} setTest={setTest}/>

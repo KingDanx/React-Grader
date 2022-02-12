@@ -12,7 +12,7 @@
     -ms-grid-columns: 1.5fr 1fr;
     grid-template-columns: 1.5fr 1fr;
     align-items: center;
-    margin-top: 22px;
+    margin-bottom: 22px;
 }
 
 .test-grader-error-text{

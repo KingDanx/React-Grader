@@ -6,20 +6,22 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import '../styles/TestPicker.css';
+import Autocomplete from '@mui/material/Autocomplete';
+import "../styles/TestPicker.css";
 
 const TestPicker = ({ test, setTest, allTests, getATest }) => {
-  const [open, setOpen] = React.useState(false);
   const [formValue, setFormValue] = React.useState("");
 
-  const handleClose = (test) => {
-    getATest(test);
-    setFormValue('');
-    setOpen(false);
-  };
+  const searchData = []
+  
+  allTests.map((el)=> searchData.push({
+    label: el.testName,
+    _id: el._id,
+  }))
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleClick = (event, test) => {
+    getATest(test);
+    setFormValue("");
   };
 
   const handleChange = (event) => {
@@ -33,58 +35,15 @@ const TestPicker = ({ test, setTest, allTests, getATest }) => {
 
   return (
     <div>
-      <h2>Tests:</h2>
-
       <div>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-helper-label">
-            Select Test
-          </InputLabel>
-          <Select
-            labelId="SelectTest"
-            label="Select Test"
-            open={open}
-            onOpen={() => handleOpen()}
-          >
-            <TextField
-              id="input-with-icon-textfield"
-              onChange={(event) => handleChange(event)}
-              autoComplete={'disabled'}
-              name="searchTests"
-              label="Search"
-              onClick={() => handleOpen()}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              variant="standard"
-            />
-            {allTests.map((el, index) =>
-              !formValue.searchTests || formValue.searchTests === '' ? (
-                <MenuItem
-                  value={el.testName}
-                  key={index}
-                  onClick={() => handleClose(el._id)}
-                  disabled
-                >
-                  <b>{el.testName}</b>
-                </MenuItem>
-              ) : el.testName.includes(formValue.searchTests) ? (
-                <MenuItem
-                  value={el.testName}
-                  key={index}
-                  onClick={() => handleClose(el._id)}
-                  disabled
-                >
-                  <b>{el.testName}</b>
-                </MenuItem>
-              ) : null
-            )}
-          </Select>
-        </FormControl>
+      <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={searchData}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Search Tests" />}
+      onChange={(event, value)=>handleClick(event.target, value._id)}
+    />
       </div>
     </div>
   );
