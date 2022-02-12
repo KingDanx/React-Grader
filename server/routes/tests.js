@@ -61,7 +61,7 @@ const volumeConversion = (inputNumber, inputUnit, outputUnit) => {
   return answer.toString();
 }
 
-console.log(volumeConversion(`2`, `litres`, `cup`));
+console.log(volumeConversion(`23`, `tablespoons`, `liters`));
 
 router.put('/gradeTest/:testId', async (req, res) => {
   try {
@@ -78,10 +78,9 @@ router.put('/gradeTest/:testId', async (req, res) => {
     test.outputNumber.map((el, i) => {
       if(temps.some((so)=> so === test.inputUnit[i]) === true){
         el.toString() === tempConverstion(test.inputUnit[i], test.outputUnit[i], test.inputNumber[i]) ? test.correct.push(true) : test.correct.push(false);
-        debugger
       }
       else if (volumes.some((so) => so === test.inputUnit[i] ) === true ){
-        el.toString() === volumeConversion(test.inputNumber[i], test.inputUnit[i], test.outputUnit[i] ? test.correct.push(true) : test.correct.push(false));
+        el.toString() === volumeConversion(test.inputNumber[i], test.inputUnit[i], test.outputUnit[i]) ? test.correct.push(true) : test.correct.push(false);
       }
     })
 
