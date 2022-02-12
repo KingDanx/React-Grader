@@ -11,10 +11,7 @@ const TestGrader = ({ test }) => {
     const gradeTest = async () => {
     await axios
     .put(`http://localhost:5000/api/tests/gradeTest/${test._id}`, {
-      inputNumber: test.inputNumbers,
-      inputUnit: test.inputUnit,
-      outputUnit: test.outputUnit,
-      outputNumber: !test.outputNumber ? null : test.outputNumber.map((el, i) => formValue[`question${i}`])
+        outputNumber: test.outputNumber.map((el, i) => formValue[`question${i}`])
     })
     .then((res) => {
       console.log(res);
