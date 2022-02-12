@@ -96,13 +96,12 @@ const TestGrader = ({ test, setTest }) => {
                     isNaN(formValue[`question${i}`]) &&
                     formValue[`question${i}`]
                       ? `Input a Number`
-                      : formValue[`question${i + 1}`] &&
+                      : formValue[`question${i + 1}`]  &&
                         !formValue[`question${i}`]
                       ? "Input a Number"
                       : null
                   }
                 />
-                {test.correct[i] === true ? " Correct" : " Incorrect"}
               </div>
             ))}
       </div>
@@ -167,7 +166,7 @@ const TestGrader = ({ test, setTest }) => {
                   ))}
                 </ol>
                 <p>
-                  Test Score: {(countOccurrences(test.correct, true) / test.correct.length) * 100}%
+                  Test Score: {(!test.correct ? null : countOccurrences(test.correct, true) / test.correct.length) * 100}%
                 </p>
               </Typography>
             </Box>
