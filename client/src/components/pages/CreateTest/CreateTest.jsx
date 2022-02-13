@@ -6,7 +6,7 @@ const CreateTask = () => {
     const [mapArray, setMapArray] = useState([null])
 
   return (
-    <div className="create-test-container"> 
+    <div> 
       <QuestionMapper mapArray={mapArray}/>
     </div>
   );

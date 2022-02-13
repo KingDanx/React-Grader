@@ -1,12 +1,29 @@
 html {
     background-image: url(../src/images/background.png);
     margin: -8px;
-    overflow: hidden;
+    overflow: scroll;
     color: white;
+    font-size: 18px;
 }
 
-.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
-    color: rgb(255 255 255 / 60%)!important;
+label{
+    color: rgb(157 14 1)!important;
+}
+
+
+@media screen and (max-width: 900px) {
+    html {
+      font-size: 14px!important;
+    }
+  }
+.app-padding{
+    padding-left: 12px;
+    padding-right: 12px;
+    
+}
+
+/* .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+    color: rgba(10, 10, 10, 0.871)!important;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-weight: 400;
     font-size: 1rem;
@@ -31,39 +48,7 @@ html {
     transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     z-index: 1;
     pointer-events: none;
-}
-
-.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
-    color: rgb(255 255 255 / 60%)!important;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.4375em;
-    letter-spacing: 0.00938em;
-    padding: 0;
-    position: relative;
-    display: block;
-    transform-origin: top left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: calc(133% - 24px);
-    position: absolute;
-    left: 0;
-    top: 0;
-    -webkit-transform: translate(14px, -9px) scale(0.75);
-    -moz-transform: translate(14px, -9px) scale(0.75);
-    -ms-transform: translate(14px, -9px) scale(0.75);
-    transform: translate(14px, -9px) scale(0.75);
-    -webkit-transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,-webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,max-width 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-    z-index: 1;
-    pointer-events: auto;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+} */
 
 .css-qzbt6i-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator {
     display: -webkit-inline-box;

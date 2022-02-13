@@ -6,6 +6,8 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import { makeStyles } from "@material-ui/core/styles";
 import "../styles/QuestionMapper.css";
 
 const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
@@ -33,11 +35,35 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
     outputUnit.push(outType);
     correct.push(null);
     outputNumbers.push(null);
-    
+
     handleSubmit(event);
     alert(`${formValue.testName} has been created!`);
     window.location.reload();
   };
+
+  const inputStyle = {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "#30a0ff",
+      },
+      background: "#ffffffb8",
+    },
+    maxWidth: 173,
+  };
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& .MuiFilledInput-root": {
+        background: "rgb(232, 241, 250, 0.5)",
+        marginBottom: 18,
+        marginTop: 18,
+      }
+    }
+  }));
+
+  const classes = useStyles();
 
   const newTest = async () => {
     await axios
@@ -70,25 +96,27 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
   const { formValue, handleChange, handleSubmit } = useForm(newTest);
 
   return (
-    <div>
-      Create Test
+    <div className="create-test-container">
       <div>
-        <TextField
-          id="test-name"
-          label="Test Name"
-          variant="standard"
-          name={"testName"}
-          onChange={(event) => handleChange(event)}
-          sx={{ marginBottom: "18px" }}
-        />
+        <div className="test-name">
+          <TextField
+            id="test-name"
+            label="Test Name"
+            variant="filled"
+            name={"testName"}
+            onChange={(event) => handleChange(event)}
+            className={classes.root}
+          />
+        </div>
+
         {mapArray.map((el, index) => {
           return (
             <div key={index}>
-              <div>
+              <div className="qm-inputs">
                 <TextField
-                  sx={{ m: 1, maxWidth: 120 }}
+                  sx={({ m: 1, maxWidth: 173 }, inputStyle)}
                   id="test-input"
-                  label="Number"
+                  label="Input Number"
                   name={`inputNumber${index}`}
                   type="text"
                   onChange={(event) => handleChange(event)}
@@ -104,6 +132,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                     Input Unit
                   </InputLabel>
                   <Select
+                    className=".qm-select"
                     native
                     defaultValue=""
                     id={`unit-select${index}`}
@@ -128,7 +157,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                     </optgroup>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <FormControl sx={{ m: 1, minWidth: 173 }}>
                   <InputLabel htmlFor="grouped-native-select">
                     Output Unit
                   </InputLabel>
@@ -146,10 +175,19 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                     formValue[`inputUnit${index}`] === `fahrenheit` ||
                     formValue[`inputUnit${index}`] === `rankine` ? (
                       <optgroup label="Temperature">
-                        <option value={"kelvin"}>Kelvin</option>
-                        <option value={"celsius"}>Celsius</option>
-                        <option value={"fahrenheit"}>Fahrenheit</option>
-                        <option value={"rankine"}>Rankine</option>
+                        {formValue[`inputUnit${index}`] === `kelvin` ? null : (
+                          <option value={"kelvin"}>Kelvin</option>
+                        )}
+                        {formValue[`inputUnit${index}`] === `celsius` ? null : (
+                          <option value={"celsius"}>Celsius</option>
+                        )}
+                        {formValue[`inputUnit${index}`] ===
+                        `fahrenheit` ? null : (
+                          <option value={"fahrenheit"}>Fahrenheit</option>
+                        )}
+                        {formValue[`inputUnit${index}`] === `rankine` ? null : (
+                          <option value={"rankine"}>Rankine</option>
+                        )}
                       </optgroup>
                     ) : null}
                     {formValue[`inputUnit${index}`] === `liters` ||
@@ -159,12 +197,27 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                     formValue[`inputUnit${index}`] === `cups` ||
                     formValue[`inputUnit${index}`] === `gallons` ? (
                       <optgroup label="Volume">
-                        <option value={"liters"}>Liters</option>
-                        <option value={"tablespoons"}>Tablespoons</option>
-                        <option value={"cubic inches"}>Cubic Inches</option>
-                        <option value={"cubic feet"}>Cubic Feet</option>
-                        <option value={"cups"}>Cups</option>
-                        <option value={"gallons"}>Gallons</option>
+                        {formValue[`inputUnit${index}`] === `liters` ? null : (
+                          <option value={"liters"}>Liters</option>
+                        )}
+                        {formValue[`inputUnit${index}`] ===
+                        `tablespoons` ? null : (
+                          <option value={"tablespoons"}>Tablespoons</option>
+                        )}
+                        {formValue[`inputUnit${index}`] ===
+                        `cubic inches` ? null : (
+                          <option value={"cubic inches"}>Cubic Inches</option>
+                        )}
+                        {formValue[`inputUnit${index}`] ===
+                        `cubic feet` ? null : (
+                          <option value={"cubic feet"}>Cubic Feet</option>
+                        )}
+                        {formValue[`inputUnit${index}`] === `cups` ? null : (
+                          <option value={"cups"}>Cups</option>
+                        )}
+                        {formValue[`inputUnit${index}`] === `gallons` ? null : (
+                          <option value={"gallons"}>Gallons</option>
+                        )}
                       </optgroup>
                     ) : null}
                   </Select>
@@ -175,77 +228,136 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
         })}
       </div>
       <div className="create-test-buttons">
-        <Button
-          disabled={
+        <Tooltip
+          title={
             mapArray.some(
               (so, i) =>
                 formValue[`inputUnit${i}`] === "" || !formValue[`inputUnit${i}`]
             ) === true
-              ? true
+              ? `Please complete all fields.`
               : mapArray.some(
                   (so, i) =>
                     formValue[`outputUnit${i}`] === "" ||
                     !formValue[`outputUnit${i}`]
                 ) === true
-              ? true
+              ? `Please complete all fields.`
               : mapArray.some(
                   (so, i) =>
                     formValue[`inputNumber${i}`] === "" ||
                     !formValue[`inputNumber${i}`] ||
                     isNaN(formValue[`inputNumber${i}`])
                 ) === true
-              ? true
+              ? `Please complete all fields.`
               : !formValue.testName
-              ? true
-              : false
-          }
-          variant="outlined"
-          onClick={() =>
-            addQuestion(
-              formValue[`inputNumber${mapArray.length - 1}`],
-              formValue[`inputUnit${mapArray.length - 1}`],
-              formValue[`outputUnit${mapArray.length - 1}`]
-            )
+              ? `Please complete all fields.`
+              : ``
           }
         >
-          Add Question
-        </Button>
-        <Button
-          onClick={(event) =>
-            finishForm(event,
-              formValue[`inputNumber${mapArray.length - 1}`],
-              formValue[`inputUnit${mapArray.length - 1}`],
-              formValue[`outputUnit${mapArray.length - 1}`]
-             )
-          }
-          sx={{ marginLeft: "12px" }}
-          variant="contained"
-          disabled={
+          <span>
+            <Button
+              disabled={
+                mapArray.some(
+                  (so, i) =>
+                    formValue[`inputUnit${i}`] === "" ||
+                    !formValue[`inputUnit${i}`]
+                ) === true
+                  ? true
+                  : mapArray.some(
+                      (so, i) =>
+                        formValue[`outputUnit${i}`] === "" ||
+                        !formValue[`outputUnit${i}`]
+                    ) === true
+                  ? true
+                  : mapArray.some(
+                      (so, i) =>
+                        formValue[`inputNumber${i}`] === "" ||
+                        !formValue[`inputNumber${i}`] ||
+                        isNaN(formValue[`inputNumber${i}`])
+                    ) === true
+                  ? true
+                  : !formValue.testName
+                  ? true
+                  : false
+              }
+              variant="outlined"
+              onClick={() =>
+                addQuestion(
+                  formValue[`inputNumber${mapArray.length - 1}`],
+                  formValue[`inputUnit${mapArray.length - 1}`],
+                  formValue[`outputUnit${mapArray.length - 1}`]
+                )
+              }
+            >
+              Add Question
+            </Button>
+          </span>
+        </Tooltip>
+        <Tooltip
+          title={
             mapArray.some(
               (so, i) =>
                 formValue[`inputUnit${i}`] === "" || !formValue[`inputUnit${i}`]
             ) === true
-              ? true
+              ? `Please complete all fields.`
               : mapArray.some(
                   (so, i) =>
                     formValue[`outputUnit${i}`] === "" ||
                     !formValue[`outputUnit${i}`]
                 ) === true
-              ? true
+              ? `Please complete all fields.`
               : mapArray.some(
                   (so, i) =>
                     formValue[`inputNumber${i}`] === "" ||
                     !formValue[`inputNumber${i}`] ||
                     isNaN(formValue[`inputNumber${i}`])
                 ) === true
-              ? true
+              ? `Please complete all fields.`
               : !formValue.testName
-              ? true
-              : false
+              ? `Please complete all fields.`
+              : ``
           }
         >
-          Submit
-        </Button>
+          <span>
+            <Button
+              onClick={(event) =>
+                finishForm(
+                  event,
+                  formValue[`inputNumber${mapArray.length - 1}`],
+                  formValue[`inputUnit${mapArray.length - 1}`],
+                  formValue[`outputUnit${mapArray.length - 1}`]
+                )
+              }
+              sx={{ marginLeft: "12px" }}
+              variant="contained"
+              disabled={
+                mapArray.some(
+                  (so, i) =>
+                    formValue[`inputUnit${i}`] === "" ||
+                    !formValue[`inputUnit${i}`]
+                ) === true
+                  ? true
+                  : mapArray.some(
+                      (so, i) =>
+                        formValue[`outputUnit${i}`] === "" ||
+                        !formValue[`outputUnit${i}`]
+                    ) === true
+                  ? true
+                  : mapArray.some(
+                      (so, i) =>
+                        formValue[`inputNumber${i}`] === "" ||
+                        !formValue[`inputNumber${i}`] ||
+                        isNaN(formValue[`inputNumber${i}`])
+                    ) === true
+                  ? true
+                  : !formValue.testName
+                  ? true
+                  : false
+              }
+            >
+              Create Test
+            </Button>
+          </span>
+        </Tooltip>
       </div>
     </div>
   );

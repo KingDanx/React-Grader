@@ -12,7 +12,8 @@
     -ms-grid-columns: 1.5fr 1fr;
     grid-template-columns: 1.5fr 1fr;
     align-items: center;
-    margin-bottom: 22px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {

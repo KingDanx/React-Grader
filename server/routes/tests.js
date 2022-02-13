@@ -47,14 +47,12 @@ router.get('/:testId', async (req, res) => {
 
 
 const tempConverstion = (inputUnit, outputUnit, inputNumber) => {
-  inputUnit == `celsius` ? inputUnit = 'celcius' : null; //npm creator can't spell nor can I
-  outputUnit == `celsius` ? outputUnit = 'celcius' : null; //npm creator can't spell nor can I
+  inputUnit == `celsius` ? inputUnit = 'celcius' : null; 
+  outputUnit == `celsius` ? outputUnit = 'celcius' : null; 
   let firstLetterUppercase = outputUnit.charAt(0).toUpperCase() + outputUnit.slice(1);
-  let answer =  Math.round(Temperature[`${inputUnit}To${firstLetterUppercase}`](parseInt(inputNumber)) * 10) / 10;
+  let answer =  Math.round(Temperature[`${inputUnit}To${firstLetterUppercase}`](inputNumber) * 10) / 10;
   return answer.toString();
 }
-
-// console.log(tempConverstion(`kelvin`, `celsius`, 9.26));
 
 const volumeConversion = (inputNumber, inputUnit, outputUnit) => {
   let answer;

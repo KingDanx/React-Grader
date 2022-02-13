@@ -41,3 +41,19 @@
     background-color: #171717!important;
     color: #fff;
 }
+
+@media screen and (max-width: 900px) {
+    .logo-font {
+      display: none!important;
+    }
+  }
+
+.right-slam-logo {
+    display: flex;
+    align-items: center;
+}
+
+.css-mrp0bo-MuiButtonBase-root-MuiButton-root {
+    font-size: 16px!important;
+    padding: 11px 22px!important;
+}
