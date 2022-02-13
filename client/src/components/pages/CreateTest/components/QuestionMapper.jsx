@@ -114,6 +114,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
             <div key={index}>
               <div className="qm-inputs">
                 <TextField
+                  value={formValue[`inputNumber${index}`]}
                   sx={({ m: 1, maxWidth: 173 }, inputStyle)}
                   id="test-input"
                   label="Input Number"
