@@ -1,38 +1,53 @@
 .test-grader-component {
-    display: -ms-grid;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
+  display: -ms-grid;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
 }
 
 .question-columns {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1.5fr 1fr;
-    grid-template-columns: 1.5fr 1fr;
-    align-items: center;
-    margin-top: 24px;
-    margin-bottom: 24px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1.5fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
+  align-items: center;
+  padding: 24px;
+  background: #a0a0a04f;
+  border-radius: 20px;
+}
+.question-columns-alt {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1.5fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
+  align-items: center;
+  padding: 24px;
+  background: #6daeff4f;
+  border-radius: 20px;
 }
 
 .css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {
-    color: rgb(61 42 42 / 52%)!important;
-    box-shadow: none;
-    background-color: rgb(255 255 255 / 50%)!important;
+  color: rgb(61 42 42 / 52%) !important;
+  box-shadow: none;
+  background-color: rgb(255 255 255 / 50%) !important;
 }
 
 .css-k4qjio-MuiFormHelperText-root {
-    position: absolute!important;
-    margin-top: 40px!important;
-    color: rgba(0, 0, 0, 0.6);
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
-    font-size: 0.75rem;
-    line-height: 1.66;
-    letter-spacing: 0.03333em;
-    text-align: left;
-    margin-right: 4px;
-    margin-bottom: 0;
-    margin-left: 6px!important;
+  position: absolute !important;
+  margin-top: 40px !important;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+  margin-right: 4px;
+  margin-bottom: 0;
+  margin-left: 6px !important;
+}
+
+.tg-span-button{
+    margin-top: 24px;
 }

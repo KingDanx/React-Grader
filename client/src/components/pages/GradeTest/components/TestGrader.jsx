@@ -82,7 +82,7 @@ const TestGrader = ({ test, setTest }) => {
         {!test.inputNumber
           ? null
           : test.inputNumber.map((el, i) => (
-              <div key={i} className="question-columns">
+              <div key={i} className={i % 2 === 0 ? `question-columns` : `question-columns-alt`}>
                 <div>
                   {i + 1}. Convert {el} <b>{test.inputUnit[i]}</b> to{" "}
                   <b>{test.outputUnit[i]}</b>
@@ -133,7 +133,7 @@ const TestGrader = ({ test, setTest }) => {
               : ""
           }
         >
-          <span>
+          <span className="tg-span-button">
             <Button
               disabled={
                 test.inputNumber.some(

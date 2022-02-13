@@ -52,7 +52,6 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
       },
       background: "#ffffffb8",
     },
-    width: 150,
   };
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -115,6 +114,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
             <div key={index}>
               <div className="qm-inputs">
                 <TextField
+                  className="qm-input-number"
                   value={formValue[`inputNumber${index}`]}
                   sx={(inputStyle)}
                   id="test-input"
@@ -129,7 +129,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                       : null
                   }
                 />
-                <FormControl className="qm-input-unit" sx={{ m: 1, width: 150 }}>
+                <FormControl className="qm-input-unit" sx={{ m: 1 }}>
                   <InputLabel htmlFor="grouped-native-select">
                     Input Unit
                   </InputLabel>
@@ -159,7 +159,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                     </optgroup>
                   </Select>
                 </FormControl>
-                <FormControl className='qm-output-unit' sx={{ m: 1, width: 150 }}>
+                <FormControl className='qm-output-unit' sx={{ m: 1}}>
                   <InputLabel htmlFor="grouped-native-select">
                     Output Unit
                   </InputLabel>
