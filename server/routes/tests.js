@@ -77,7 +77,7 @@ const volumeConversion = (inputNumber, inputUnit, outputUnit) => {
     return answer.toString();
   }
   else{
-    answer = Math.round(Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`${outputUnit}`, true) * 10) / 10;
+    answer = Math.round(Unitz.parse(`${inputNumber} ${inputUnit}`).convert(`${outputUnit}`) * 10) / 10;
     return answer.toString();
   }
   //Conditionals are nessissary because library does not account for cubic feet to liters. Therefore all cubic feet/inches must be first converted to gallons
