@@ -1,5 +1,6 @@
 .css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
   margin-top: -5px !important;
+  transform: translate(14px, -14px) scale(0.75)!important;
 }
 
 .create-test-buttons {
