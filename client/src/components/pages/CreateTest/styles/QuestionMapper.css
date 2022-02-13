@@ -78,3 +78,8 @@ select {
     transform: translate(12px, 34px) scale(1)!important;
    
 }
+ 
+.qm-output-unit {
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+}

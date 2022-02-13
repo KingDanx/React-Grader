@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
 import "../styles/QuestionMapper.css";
+import { width } from "@mui/system";
 
 const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
   const [inputNumbers, setInputNumbers] = useState([]);
@@ -51,7 +52,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
       },
       background: "#ffffffb8",
     },
-    maxWidth: 173,
+    width: 150,
   };
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -115,7 +116,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
               <div className="qm-inputs">
                 <TextField
                   value={formValue[`inputNumber${index}`]}
-                  sx={({ m: 1, maxWidth: 173 }, inputStyle)}
+                  sx={(inputStyle)}
                   id="test-input"
                   label="Input Number"
                   name={`inputNumber${index}`}
@@ -128,7 +129,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                       : null
                   }
                 />
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <FormControl className="qm-input-unit" sx={{ m: 1, width: 150 }}>
                   <InputLabel htmlFor="grouped-native-select">
                     Input Unit
                   </InputLabel>
@@ -158,7 +159,7 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                     </optgroup>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ m: 1, minWidth: 173 }}>
+                <FormControl className='qm-output-unit' sx={{ m: 1, width: 150 }}>
                   <InputLabel htmlFor="grouped-native-select">
                     Output Unit
                   </InputLabel>
