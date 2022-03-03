@@ -7,7 +7,7 @@ html {
 }
 
 label{
-    color: rgb(157 14 1)!important;
+    color: #1d83ff!important;
 }
 
 @media screen and (max-width: 900px) {

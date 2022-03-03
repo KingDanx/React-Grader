@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import Logo from "../src/images/flexion.png";
+import Logo from "../src/images/react.png";
 import "../src/ResponsiveAppBar.css";
 
 const pages = ["Grade Test", "Create Test"];
@@ -35,12 +35,12 @@ const ResponsiveAppBar = () => {
             className="css-1t6c9ts"
             style={{ flexGrow: 0 }}
             src={Logo}
-            width="50px"
+            width="57px"
             height="50px"
-            alt="Flexion Logo"
+            alt="Anonymous Logo"
           />
           <div className="css-1t6c9ts logo-font">
-            <b>Flexion</b> Grader
+            <b>React</b> Grader
           </div>
           <Box
             sx={{
@@ -102,7 +102,7 @@ const ResponsiveAppBar = () => {
               style={{ flexGrow: 0 }}
               src={Logo}
               height="50px"
-              alt="Flexion Logo"
+              alt="React Logo"
             />
             <Typography
               variant="h6"
@@ -110,7 +110,7 @@ const ResponsiveAppBar = () => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
             >
-              <b>Flexion</b> Grader
+              <b>React</b> Grader
             </Typography>
           </div>
 
