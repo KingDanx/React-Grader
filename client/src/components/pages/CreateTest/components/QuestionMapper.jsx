@@ -122,9 +122,9 @@ const QuestionMapper = ({ mapArray, validForm, setValidForm }) => {
                   name={`inputNumber${index}`}
                   type="text"
                   onChange={(event) => handleChange(event)}
-                  error={isNaN(formValue[`inputNumber${index}`]) ? true : false}
+                  error={isNaN(formValue[`inputNumber${index}`]) && formValue[`inputNumber${index}`] ? true : false}
                   helperText={
-                    isNaN(formValue[`inputNumber${index}`])
+                    isNaN(formValue[`inputNumber${index}`]) && formValue[`inputNumber${index}`]
                       ? "Input a Number"
                       : null
                   }
