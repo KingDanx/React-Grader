@@ -1,5 +1,7 @@
 <b>React</b>Grader
 
+This is a responsive full stack unit conversion test grading application.  This can be used to create a templet of a test then quickly grade each test by inputing students answers from their paper worksheet.  All answers are rounded to the nearest tenth.  Test can only be graded once all answers have a valid input.  Test can only be created once all test questions have a valid input.
+
 ![image](https://user-images.githubusercontent.com/88867180/156486821-e4f19ee7-15a5-4da4-945d-a6cf038d3555.png)
 ![image](https://user-images.githubusercontent.com/88867180/156487052-562aac6f-3bf9-43c9-97fc-cf49a6cd1650.png)
 ![image](https://user-images.githubusercontent.com/88867180/156487341-c4442eb0-ae27-45ec-bf57-4527eec88663.png)
