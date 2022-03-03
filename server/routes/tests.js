@@ -54,8 +54,6 @@ const tempConverstion = (inputUnit, outputUnit, inputNumber) => {
   return answer.toString();
 }
 
-
-
 const volumeConversion = (inputNumber, inputUnit, outputUnit) => {
   let answer;
   if( inputUnit == `cubic inches`){
