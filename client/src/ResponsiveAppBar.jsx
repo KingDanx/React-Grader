@@ -131,7 +131,7 @@ const ResponsiveAppBar = () => {
                     my: 2,
                     color: "white",
                     display: "block",
-                    "&:hover": { backgroundColor: "#fb2d17" },
+                    "&:hover": { backgroundColor: "#1d83ff" },
                   }}
                 >
                   {page}
